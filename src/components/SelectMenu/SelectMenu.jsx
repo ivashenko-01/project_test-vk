@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { setPrivacy, setAvatarColor, setFriends } from "../../redux/slices/filterSlice";
@@ -47,6 +47,8 @@ export default function SelectMenu({ title, variants, listGroup }) {
     const onChangeFriendsValue = (item) => {
         dispatch(setFriends(item));
     };
+
+    useEffect(() => {}, [dispatch]);
 
     return (
         <>

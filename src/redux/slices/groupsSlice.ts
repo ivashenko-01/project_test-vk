@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-// import axios from "axios";
-import listProduct from "../../assets/database/groups.json";
 
-const initialState = {
+import listProduct from "../../assets/database/groups.json";
+import { GetGroupsResponse } from "../store";
+
+const initialState: GetGroupsResponse = {
     result: 0,
     group: [],
     isLoading: true,
@@ -10,11 +11,10 @@ const initialState = {
 
 // --- Получение списка групп
 export const getListGroup = createAsyncThunk("groups/getListGroup", async () => {
+    // -- Якобы запрос, а так с помощью Axios/Fetch отправляем
     const data = listProduct;
-    // const { data } = await axios.get(`./`);
 
-    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
+    const sleep = (ms:number) => new Promise((resolve) => setTimeout(resolve, ms));
     await sleep(1000);
 
     return data;
@@ -35,7 +35,7 @@ export const groupsSlice = createSlice({
             state.group = action.payload;
             state.isLoading = false;
         });
-        builder.addCase(getListGroup.rejected, (state, action) => {
+        builder.addCase(getListGroup.rejected, (state) => {
             state.result = 0;
             state.isLoading = false;
         });
